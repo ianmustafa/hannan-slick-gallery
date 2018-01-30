@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Slick Gallery &ndash; Untuk Hannan</title>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/slick-carousel@1.8.1/slick/slick.css"/>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/slick-carousel@1.8.1/slick/slick-theme.css"/>
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background-color: #3498db;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 600px;
+    }
+    .row {
+      margin-top: 30px;
+    }
+    .slider {
+      width: 600px;
+      height: 400px;
+    }
+    .slick-prev, .slick-next {
+      width: 40px;
+      height: 40px;
+    }
+    .slick-prev {
+      left: -50px
+    }
+    .slick-next {
+      right: -50px
+    }
+    .slick-prev::before, .slick-next::before {
+      font-family: FontAwesome;
+      font-size: 40px;
+    }
+    .slick-prev::before {
+      content: "\f137";
+    }
+    .slick-next::before {
+      content: "\f138";
+    }
+    .thumbnails {
+      display: flex;
+      justify-content: space-between;
+    }
+    .thumb {
+      width: 120px;
+      height: 80px;
+      filter: brightness(35%) contrast(50%);
+      transition: filter .5s;
+      cursor: pointer;
+    }
+    .thumb:hover, .thumb:focus, .thumb:active, .thumb.active {
+      filter: none;
+    }
+    p.footer {
+      font-size: .75em;
+      text-align: center;
+    }
+    p.footer a {
+      color: #fff;
+      text-decoration: none;
+    }
+    p.footer a:hover, p.footer a:focus, p.footer a:active {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="row">
+    <div class="slider">
+      <img src="/photo1.jpg" alt="Photo 1" width="600" height"400">
+      <img src="/photo2.jpg" alt="Photo 2" width="600" height"400">
+      <img src="/photo3.jpg" alt="Photo 3" width="600" height"400">
+      <img src="/photo4.jpg" alt="Photo 4" width="600" height"400">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="thumbnails">
+      <!-- 1. Pastikan urutan gambar dan thumb SAMA PERSIS -->
+      <!-- 2. Berikan class .active pada thumb dari gambar yang pertama ditampilkan -->
+      <img class="thumb active" src="/thumb1.jpg" alt="Thumb 1" width="120" height"80">
+      <img class="thumb" src="/thumb2.jpg" alt="Thumb 2" width="120" height"80">
+      <img class="thumb" src="/thumb3.jpg" alt="Thumb 3" width="120" height"80">
+      <img class="thumb" src="/thumb4.jpg" alt="Thumb 4" width="120" height"80">
+    </div>
+  </div>
+
+  <p class="row footer">
+    Oleh <a href="https://facebook.com/iianmustafa" target="_blank">Ian Mustafa</a>.
+    Gambar oleh <a href="https://unsplash.com/" target="_blank">Unsplash</a>.
+  </p>
+</div>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/slick-carousel@1.8.1/slick/slick.min.js
+"></script>
+
+<script type="text/javascript">
+  // Event untuk ubah class .active di .thumb
+  $('.slider').on('beforeChange', function(e, slick, current, next) {
+    // Loop elemen .thumb di .thumbnails
+    $('.thumb', '.thumbnails').each(function (i, el) {
+      // Jika next slider sama dengan thumb yang di-loop, tambahkan class .active
+      if (next === i) $(el).addClass('active')
+      // Selain itu hapus class active
+      else $(el).removeClass('active')
+    });
+  });
+
+  // Event untuk ubah slide aktif ketika thumb di-klik
+  $('.thumb', '.thumbnails').click(function (e) {
+    // Panggil method slickGoTo sesuai dengan index dari thumb yang di-klik
+    $('.slider').slick('slickGoTo', $('.thumb').index(this))
+  });
+
+  $(function() {
+    $('.slider').slick({
+      infinite: true,
+      speed: 500,
+      fade: true,
+      autoPlay: true,
+    });
+  });
+</script>
+
+</body>
+</html>
